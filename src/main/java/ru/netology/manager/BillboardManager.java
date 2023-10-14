@@ -35,9 +35,9 @@ public class BillboardManager {
     }
 
     //отображение фильмов в порядке добавления
-//    public void findAll() {
-//        getMovies();
-//    }
+    public Movie[] findAll() {
+        return movies;
+    }
 
     //отображение  фильмов в обратном порядке
     public Movie[] getLastAdd() {

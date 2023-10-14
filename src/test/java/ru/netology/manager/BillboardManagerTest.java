@@ -63,7 +63,7 @@ public class BillboardManagerTest {
     }
 
     @Test
-    void mustShowOverMax() {
+    void mustShowOverMax() { // больше фильмов, чем лимит
         BillboardManager manager = new BillboardManager(8);
         manager.add(first);
         manager.add(second);
@@ -74,6 +74,37 @@ public class BillboardManagerTest {
         manager.add(seventh);
 
         Movie[] actual = manager.getLastAdd();
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void mustShowUnderMax() { // меньше фильмов, чем лимит
+        BillboardManager manager = new BillboardManager(6);
+        manager.add(first);
+        manager.add(second);
+        manager.add(third);
+        manager.add(fourth);
+        manager.add(fifth);
+        manager.add(sixth);
+
+        Movie[] expected = manager.findAll();
+        Movie[] actual = manager.getMovies();
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void mustShowSameMax() { // столько же, как лимит
+        BillboardManager manager = new BillboardManager(7);
+        manager.add(first);
+        manager.add(second);
+        manager.add(third);
+        manager.add(fourth);
+        manager.add(fifth);
+        manager.add(sixth);
+        manager.add(seventh);
+
+        Movie[] expected = manager.findAll();
+        Movie[] actual = manager.getMovies();
         Assertions.assertArrayEquals(expected, actual);
     }
 }
