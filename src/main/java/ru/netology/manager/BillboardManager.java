@@ -17,10 +17,6 @@ public class BillboardManager {
         this.countMovies = countMovies;
     }
 
-    public Movie[] getMovies() {
-        return movies;
-    }
-
 
     //добавление фильма в конец массива
     public void add(Movie movie) {

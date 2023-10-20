@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import ru.netology.domain.Movie;
 import static org.junit.jupiter.api.Assertions.*;
 
-
 public class BillboardManagerTest {
 
     BillboardManager manager = new BillboardManager();
@@ -36,22 +35,6 @@ public class BillboardManagerTest {
     }
 
     @Test
-    void shouldShowAllMovie() {
-        BillboardManager manager = new BillboardManager();
-        manager.add(first);
-        manager.add(second);
-        manager.add(third);
-        manager.add(fourth);
-        manager.add(fifth);
-        manager.add(sixth);
-        manager.add(seventh);
-
-        Movie[] expected = manager.getMovies();
-        Movie[] actual = manager.getMovies();
-        Assertions.assertArrayEquals(expected, actual);
-    }
-
-    @Test
     void shouldShowNothing() {
         BillboardManager manager = new BillboardManager(0);
 
@@ -62,22 +45,6 @@ public class BillboardManagerTest {
 
     @Test
     void mustShowOverMax() { // больше фильмов, чем лимит
-        BillboardManager manager = new BillboardManager(8);
-        manager.add(first);
-        manager.add(second);
-        manager.add(third);
-        manager.add(fourth);
-        manager.add(fifth);
-        manager.add(sixth);
-        manager.add(seventh);
-
-        Movie[] expected = {seventh, sixth, fifth, fourth, third, second, first};
-        Movie[] actual = manager.getLastAdd();
-        Assertions.assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    void mustShowUnderMax() { // меньше фильмов, чем лимит
         BillboardManager manager = new BillboardManager(6);
         manager.add(first);
         manager.add(second);
@@ -86,24 +53,35 @@ public class BillboardManagerTest {
         manager.add(fifth);
         manager.add(sixth);
 
-        Movie[] expected = manager.findAll();
-        Movie[] actual = manager.getMovies();
+        Movie[] expected = {sixth, fifth, fourth, third, second, first};
+        Movie[] actual = manager.getLastAdd();
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void mustShowUnderMax() { // меньше фильмов, чем лимит
+        BillboardManager manager = new BillboardManager(4);
+        manager.add(first);
+        manager.add(second);
+        manager.add(third);
+        manager.add(fourth);
+
+        Movie[] expected = {first, second, third, fourth};
+        Movie[] actual = manager.findAll();
         Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
     void mustShowSameMax() { // столько же, как лимит
-        BillboardManager manager = new BillboardManager(7);
+        BillboardManager manager = new BillboardManager(5);
         manager.add(first);
         manager.add(second);
         manager.add(third);
         manager.add(fourth);
         manager.add(fifth);
-        manager.add(sixth);
-        manager.add(seventh);
 
-        Movie[] expected = {first, second, third, fourth, fifth, sixth, seventh};
-        Movie[] actual = manager.getMovies();
+        Movie[] expected = {first, second, third, fourth, fifth};
+        Movie[] actual = manager.findAll();
         Assertions.assertArrayEquals(expected, actual);
     }
 }
