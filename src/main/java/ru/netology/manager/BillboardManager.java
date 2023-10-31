@@ -1,12 +1,10 @@
 package ru.netology.manager;
 import ru.netology.domain.Movie;
 
-//https://otvet.mail.ru/question/229882561
-
 public class BillboardManager {
 
     private Movie[] movies = new Movie[0];
-    private int countMovies = 5;
+    private int countMovies = 5; // дефолтное значение
 
 
     // пустой конструктор
@@ -17,10 +15,8 @@ public class BillboardManager {
         this.countMovies = countMovies;
     }
 
-
     //добавление фильма в конец массива
     public void add(Movie movie) {
-
         Movie[] tmp = new Movie[movies.length + 1];
 
         for (int i = 0; i < movies.length; i++) {
@@ -36,7 +32,7 @@ public class BillboardManager {
     }
 
     //отображение  фильмов в обратном порядке
-    public Movie[] getLastAdd() {
+    public Movie[] findLast() {
         int moviesLength = movies.length;
         if (moviesLength < countMovies) {
             countMovies = moviesLength;

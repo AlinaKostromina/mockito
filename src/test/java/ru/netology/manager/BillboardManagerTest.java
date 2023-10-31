@@ -16,7 +16,7 @@ public class BillboardManagerTest {
     private Movie fifth = new Movie("InvisibleMan");
     private Movie sixth = new Movie("Trolls");
     private Movie seventh = new Movie("NumberOne");
-
+    private int movieLimit = 5;
 
     @Test
     void shouldShowSevenMovie() {
@@ -30,7 +30,7 @@ public class BillboardManagerTest {
         manager.add(seventh);
 
         Movie[] expected = {seventh, sixth, fifth, fourth, third, second, first};
-        Movie[] actual = manager.getLastAdd();
+        Movie[] actual = manager.findLast();
         Assertions.assertArrayEquals(expected, actual);
     }
 
@@ -38,14 +38,15 @@ public class BillboardManagerTest {
     void shouldShowNothing() {
         BillboardManager manager = new BillboardManager(0);
 
-        Movie[] actual = manager.getLastAdd();
+        Movie[] actual = manager.findLast();
         Movie [] expected = new Movie[0];
         Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
-    void mustShowOverMax() { // больше фильмов, чем лимит
-        BillboardManager manager = new BillboardManager(8);
+    void mustShowOverLimitWithDefaultNumber() { // больше фильмов, чем лимит, с дефолтным значением
+        BillboardManager manager = new BillboardManager();
+
         manager.add(first);
         manager.add(second);
         manager.add(third);
@@ -54,40 +55,9 @@ public class BillboardManagerTest {
         manager.add(sixth);
         manager.add(seventh);
 
-        Movie[] expected = {seventh, sixth, fifth, fourth, third, second, first};
-        Movie[] actual = manager.getLastAdd();
-        Assertions.assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    void mustShowUnderMax() { // меньше фильмов, чем лимит
-        BillboardManager manager = new BillboardManager(6);
-        manager.add(first);
-        manager.add(second);
-        manager.add(third);
-        manager.add(fourth);
-        manager.add(fifth);
-        manager.add(sixth);
-
-        Movie[] expected = {sixth, fifth, fourth, third, second, first};
-        Movie[] actual = manager.getLastAdd();
-        Assertions.assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    void mustShowSameMax() { // столько же, как лимит
-        BillboardManager manager = new BillboardManager(7);
-        manager.add(first);
-        manager.add(second);
-        manager.add(third);
-        manager.add(fourth);
-        manager.add(fifth);
-        manager.add(sixth);
-        manager.add(seventh);
-
-        Movie[] expected = {seventh, sixth, fifth, fourth, third, second, first};
-        Movie[] actual = manager.getLastAdd();
-        Assertions.assertArrayEquals(expected, actual);
+        Movie[] expected = {first, second, third, fourth, fifth, sixth, seventh };
+        Movie[] actual = manager.findAll();
+        Assertions.assertEquals(expected, actual);
     }
 }
 
