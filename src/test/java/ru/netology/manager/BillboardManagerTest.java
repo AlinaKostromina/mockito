@@ -149,7 +149,7 @@ public class BillboardManagerTest {
         manager.add(sixth);
         manager.add(seventh);
 
-        Movie[] expected = {seventh, sixth, fifth, fourth, third, second, first};
+        Movie[] expected = {seventh, sixth, fifth, fourth, third};
         Movie[] actual = manager.findLast();
         Assertions.assertArrayEquals(expected, actual);
     }
@@ -195,7 +195,7 @@ public class BillboardManagerTest {
         manager.add(sixth);
         manager.add(seventh);
 
-        Movie[] expected = {sixth, fifth, fourth, third, second, first};
+        Movie[] expected = {seventh, sixth, fifth, fourth, third, second};
         Movie[] actual = manager.findLast();
         Assertions.assertArrayEquals(expected, actual);
     }

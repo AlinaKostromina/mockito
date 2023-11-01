@@ -31,7 +31,7 @@ public class BillboardManager {
         return movies;
     }
 
-    //отображение  фильмов в обратном порядке
+    //отображение фильмов в обратном порядке
     public Movie[] findLast() {
         int moviesLength = movies.length;
         if (moviesLength < countMovies) {
